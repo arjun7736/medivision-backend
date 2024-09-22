@@ -1,8 +1,8 @@
 import {Router} from "express"
 import { BillRepository } from "../../infrastructure/db/repositories/BillRepository"
 import { BillService } from "../../domain/services/BillService"
-import { CreateBill } from "../../application/usecases/CreateBill"
-import { GetBills } from "../../application/usecases/GetBills"
+import { CreateBill } from "../../application/billUsecases/CreateBill"
+import { GetBills } from "../../application/billUsecases/GetBills"
 import { BillController } from "../controller/BillController"
 
 const router = Router()

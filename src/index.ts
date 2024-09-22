@@ -3,7 +3,10 @@ import cookieParser from "cookie-parser"
 import morgan from "morgan"
 import connectDB from "./infrastructure/db/db";
 import billRoute from "./interfaces/routes/BillRoutes"
+import authRoute from "./interfaces/routes/AuthRoutes"
 import dotenv from "dotenv"
+import errorMiddleware from "./middleware/ErrorMiddleware";
+
 dotenv.config()
 
 const app = express();
@@ -14,8 +17,9 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 app.use(morgan("dev"));
-app.use("/api",billRoute)
-// app.use(errorMiddleware())
+app.use("/api/bill",billRoute)
+app.use("/api/auth",authRoute)
+app.use(errorMiddleware)
 
 
 
