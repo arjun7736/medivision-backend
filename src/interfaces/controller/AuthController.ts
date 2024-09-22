@@ -8,9 +8,10 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       const token = await this.userLogin.execute(email, password);
-      res.cookie("token", token, { httpOnly: true, secure: true });
+      res.cookie("token", token, { httpOnly: true, secure: false });
+      res.json({message:"Login Complete"})
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 }

@@ -12,6 +12,6 @@ export class AuthService {
   }
 
   async createToken(id:mongoose.Types.ObjectId):Promise<string>{
-    return await jwt.sign({id},process.env.JWT_SECRET as string )
+    return await jwt.sign({id},process.env.JWT_SECRET_KEY as string )
   }
 }
