@@ -6,13 +6,20 @@ import billRoute from "./interfaces/routes/BillRoutes"
 import authRoute from "./interfaces/routes/AuthRoutes"
 import dotenv from "dotenv"
 import errorMiddleware from "./middleware/ErrorMiddleware";
-
+import cors from "cors"
 dotenv.config()
 
 const app = express();
 const mongo: undefined | string = process.env.MONGO_URI;
 const port: undefined | string = process.env.PORT;
 
+const corsOptions = {
+  origin: 'http://localhost:5173', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, 
+};
+app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
@@ -35,3 +42,5 @@ if (port) {
     console.log("Running On " + port);
   });
 } 
+
+

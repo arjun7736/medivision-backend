@@ -8,8 +8,7 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       const token = await this.userLogin.execute(email, password);
-      res.cookie("token", token, { httpOnly: true, secure: false });
-      res.json({message:"Login Complete"})
+      res.json(token);
     } catch (error) {
       next(error);
     }
