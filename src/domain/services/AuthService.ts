@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 
 export class AuthService {
-  constructor(private authRepository: IAuthRepository) {}
+  constructor() {}
 
   async checkPassword(password: string, hpassword: string): Promise<boolean> {
     return await bcrypt.compare(password,hpassword)

@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
-import { Bill } from "../entities/Bill";
-import { IBillRepository } from "../repositories/IBillRepository";
+import { CustomError } from "../../utils/Error";
+import { IBill } from "../../infrastructure/modelInterface/IBill";
 
-export class BillService{
-    constructor(private billRepository:IBillRepository){}
+export class BillService {
+  constructor() {}
 
-    async createBill():Promise<string>{
-        return  "chnage Promise to bills"
-    }
+  async validateBill(billData: IBill): Promise<boolean> {
+    const { totalAmount, totalPercentage } = billData;
+    if (!totalAmount || !totalPercentage)
+      throw new CustomError(400, "Fill all the Field");
+    return true;
+  }
 
-    async getbills(id:mongoose.Types.ObjectId):Promise<string>{
-        return "change this tooooooooo"
-    }
+  async getbills(id: mongoose.Types.ObjectId): Promise<string> {
+    return "change this tooooooooo";
+  }
 }

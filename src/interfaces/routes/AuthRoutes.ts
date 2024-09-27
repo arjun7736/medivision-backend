@@ -7,7 +7,7 @@ import { AuthController } from "../controller/AuthController";
 const router =Router()
 
 const authRepository= new AuthRepository()
-const authService = new AuthService(authRepository)
+const authService = new AuthService()
 
 const loginUseCase = new UserLogin(authService,authRepository)
 const authController = new AuthController(loginUseCase)

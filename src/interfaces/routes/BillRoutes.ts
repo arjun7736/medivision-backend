@@ -5,19 +5,22 @@ import { CreateBill } from "../../application/billUsecases/CreateBill"
 import { GetBills } from "../../application/billUsecases/GetBills"
 import { BillController } from "../controller/BillController"
 import verifyToken from "../../middleware/JwtVerification"
+import { GetHospitalData } from "../../application/billUsecases/GetHospitalData"
 
 const router = Router()
 
 const billRepository =new BillRepository()
-const billService = new BillService(billRepository)
-const createBillUsecase =new CreateBill(billService)
-const getBillUsecase = new GetBills(billService)
+const billService = new BillService()
+
+const createBillUsecase =new CreateBill(billService,billRepository)
+const getBillUsecase = new GetBills(billRepository)
+const getHospital = new GetHospitalData(billRepository)
+
+const billController =new BillController(createBillUsecase,getBillUsecase,getHospital)
 
 
-const billController =new BillController(createBillUsecase,getBillUsecase)
-
-
-router.post('/create-bill',verifyToken,(req,res)=>billController.create(req,res))
-router.get("/get-allbills",verifyToken,(req,res)=>billController.getAll(req,res))
+router.post('/create-bill',verifyToken,(req,res,next)=>billController.create(req,res,next))
+router.get("/get-allbills/:filter",verifyToken,(req,res,next)=>billController.getAll(req,res,next))
+router.get("/get-hospitalData",verifyToken,(req,res,next)=>billController.getHospitalData(req,res,next))
 
 export default router
