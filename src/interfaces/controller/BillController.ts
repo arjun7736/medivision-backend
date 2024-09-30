@@ -2,16 +2,19 @@ import { NextFunction, Request, Response } from "express";
 import { CreateBill } from "../../application/billUsecases/CreateBill";
 import { GetBills } from "../../application/billUsecases/GetBills";
 import { GetHospitalData } from "../../application/billUsecases/GetHospitalData";
+import { GetSingleBill } from "../../application/billUsecases/GetSingleBill";
 
 export class BillController {
   constructor(
     private createBill: CreateBill,
     private getBills: GetBills,
-    private getHospital: GetHospitalData
+    private getHospital: GetHospitalData,
+    private getSingleData:GetSingleBill
   ) {}
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.body)
       const data = await this.createBill.execute(req.body);
       res.json(data);
     } catch (error) {
@@ -35,6 +38,15 @@ export class BillController {
       res.json(data)
     } catch (error) {
       next(error);
+    }
+  }
+  async getSingleBillData(req:Request,res:Response,next:NextFunction){
+    try {
+      const {id} =req.params
+      const billData =await this.getSingleData.execute(id)
+      res.json(billData)
+    } catch (error) {
+      next(error)
     }
   }
 }

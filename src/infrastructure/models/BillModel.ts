@@ -93,5 +93,11 @@ const BillSchema: Schema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  netPay:{
+    type:Number
+  },
+  gstAmount:{
+    type:Number
+  }
 });
 export default mongoose.model<IBill>("Bill", BillSchema);

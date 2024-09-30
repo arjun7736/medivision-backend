@@ -9,4 +9,5 @@ export interface IBillRepository{
     getMonthlyBills(start:Date,end:Date):Promise<Bill[]>
     getYearlyBills(year:number):Promise<Bill[]>
     getHospitalData():Promise<Hospital[]>
+    getSingleBill(id:string):Promise<Bill|null>
 }

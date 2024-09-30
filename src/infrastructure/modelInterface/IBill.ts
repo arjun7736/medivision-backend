@@ -5,6 +5,8 @@ export interface IBill extends Document{
     hospital:IHospital,
     totalAmount:number,
     totalPercentage:number,
+    netPay:number,
+    gstAmount:number,
     data:Data[]
 }
 

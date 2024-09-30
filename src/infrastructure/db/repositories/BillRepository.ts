@@ -42,4 +42,7 @@ export class BillRepository implements IBillRepository {
       },
     });
   }
+  async getSingleBill(id: string): Promise<Bill |null> {
+    return await BillDB.findById(id)
+  }
 }
